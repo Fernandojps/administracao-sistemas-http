@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Meu Projeto | HTTP</title>
+    <title>Projeto Fernando | HTTP</title>
 
     <style>
         * {
@@ -74,6 +74,12 @@
             border: 1px solid #334155;
             border-radius: 14px;
             padding: 20px;
+            transition: 0.3s;
+        }
+
+        .info:hover {
+            transform: translateY(-4px);
+            border-color: #2563eb;
         }
 
         .info span {
@@ -93,6 +99,7 @@
         .section {
             border-top: 1px solid #334155;
             padding-top: 28px;
+            margin-top: 10px;
         }
 
         .section h2 {
@@ -106,6 +113,68 @@
             line-height: 1.7;
         }
 
+        /* ÁREA DA CURIOSIDADE */
+
+        .curiosidade {
+            margin-top: 30px;
+            background: #0f172a;
+            border: 1px solid #334155;
+            border-radius: 16px;
+            overflow: hidden;
+        }
+
+        .curiosidade-header {
+            padding: 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: 0.3s;
+        }
+
+        .curiosidade-header:hover {
+            background: #172033;
+        }
+
+        .curiosidade-header h2 {
+            color: white;
+            font-size: 19px;
+        }
+
+        .seta {
+            font-size: 20px;
+            transition: 0.3s;
+        }
+
+        .conteudo-curiosidade {
+            display: none;
+            padding: 0 20px 25px 20px;
+            border-top: 1px solid #334155;
+        }
+
+        .conteudo-curiosidade p {
+            color: #94a3b8;
+            line-height: 1.7;
+            margin-top: 18px;
+        }
+
+        .botao {
+            margin-top: 20px;
+            padding: 10px 16px;
+            border: none;
+            border-radius: 8px;
+            background: #2563eb;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .botao:hover {
+            background: #1d4ed8;
+            transform: translateY(-2px);
+        }
+
         footer {
             text-align: center;
             margin-top: 20px;
@@ -114,6 +183,7 @@
         }
 
         @media (max-width: 650px) {
+
             .card {
                 padding: 30px 22px;
             }
@@ -121,11 +191,13 @@
             .info-grid {
                 grid-template-columns: 1fr;
             }
+
         }
     </style>
 </head>
 
 <body>
+
     <main class="container">
 
         <div class="card">
@@ -138,6 +210,9 @@
                 Página oficial do projeto desenvolvido para a disciplina,
                 apresentada de forma simples, moderna e organizada.
             </p>
+
+
+            <!-- INFORMAÇÕES -->
 
             <div class="info-grid">
 
@@ -158,6 +233,9 @@
 
             </div>
 
+
+            <!-- SOBRE O PROJETO -->
+
             <section class="section">
 
                 <h2>Sobre o projeto</h2>
@@ -170,12 +248,106 @@
 
             </section>
 
+
+            <!-- CURIOSIDADE CLICÁVEL -->
+
+            <div class="curiosidade">
+
+                <div class="curiosidade-header" onclick="abrirCuriosidade()">
+
+                    <h2>💡 Curiosidade sobre tecnologia</h2>
+
+                    <span class="seta" id="seta">▼</span>
+
+                </div>
+
+
+                <div class="conteudo-curiosidade" id="conteudo">
+
+                    <p id="textoCuriosidade">
+                        Clique no botão abaixo para descobrir uma curiosidade!
+                    </p>
+
+                    <button class="botao" onclick="novaCuriosidade(event)">
+                        🎲 Outra curiosidade
+                    </button>
+
+                </div>
+
+            </div>
+
         </div>
 
+
         <footer>
-            © 2026 • Projeto acadêmico
+            © 2026 • Projeto acadêmico de Fernando
         </footer>
 
     </main>
+
+
+    <script>
+
+        const curiosidades = [
+
+            "O HTTP é um dos principais protocolos utilizados para comunicação entre navegadores e servidores na internet.",
+
+            "A primeira versão do HTTP foi criada no início da década de 1990 por Tim Berners-Lee, criador da World Wide Web.",
+
+            "Quando você acessa um site, seu navegador normalmente envia uma requisição HTTP ou HTTPS para um servidor.",
+
+            "O código HTTP 404 significa que o servidor não encontrou o recurso solicitado.",
+
+            "O código HTTP 200 normalmente indica que uma requisição foi processada com sucesso.",
+
+            "HTTPS é uma versão do HTTP que utiliza criptografia para proteger a comunicação entre o navegador e o servidor.",
+
+            "O HTTP funciona no modelo de requisição e resposta: o cliente solicita algo e o servidor responde.",
+
+            "Um navegador como Chrome, Firefox ou Edge atua como cliente quando solicita uma página da internet."
+
+        ];
+
+
+        let aberto = false;
+
+
+        function abrirCuriosidade() {
+
+            const conteudo = document.getElementById("conteudo");
+            const seta = document.getElementById("seta");
+
+            aberto = !aberto;
+
+            if (aberto) {
+
+                conteudo.style.display = "block";
+                seta.style.transform = "rotate(180deg)";
+
+            } else {
+
+                conteudo.style.display = "none";
+                seta.style.transform = "rotate(0deg)";
+
+            }
+
+        }
+
+
+        function novaCuriosidade(event) {
+
+            event.stopPropagation();
+
+            const texto = document.getElementById("textoCuriosidade");
+
+            const numero =
+                Math.floor(Math.random() * curiosidades.length);
+
+            texto.textContent = curiosidades[numero];
+
+        }
+
+    </script>
+
 </body>
 </html>
